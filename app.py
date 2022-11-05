@@ -72,7 +72,7 @@ ret = subprocess.run(command, shell=True)
 
 # vertwxAIにアクセスするためのトークンを発行
 command2 = "gcloud auth print-access-token"
-ret2 = subprocess.run(command2, shell=True, encoding='utf-8', stdout=subprocess.PIPE)
+ret2 = subprocess.run(command2, shell=True, capture_output=True, text=True)
 tokentest = ret2.stdout
 token2 = subprocess.getoutput(command2)
 
