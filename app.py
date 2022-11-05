@@ -10,6 +10,7 @@ import requests
 import pprint
 import subprocess # pythonプログラム上でコマンドラインを実行するモジュール
 import streamlit as st
+import pprint
 
 
 # streamlitのシークレット情報を変数に格納
@@ -59,6 +60,10 @@ ENDPOINT_ID = st.secrets["ENDPOINT_ID"]
 # ↑の情報をkey.jsonとしてファイルで保存
 with open("./key.json", "w") as f:
     json.dump(service_account_key, f, indent=2, ensure_ascii=False)
+
+#一時的
+with open("./key.json") as f:
+    jf = json.load(f)
 
 # 鍵情報を使ってGCPに認証
 command = "gcloud auth activate-service-account  --key-file='./key.json'"
@@ -153,5 +158,8 @@ if check_password():
           ]
         }
         #一時的
-        st.text(token2)
         st.text(ret)
+        st.text(token2)
+        st.text(jf)
+
+
