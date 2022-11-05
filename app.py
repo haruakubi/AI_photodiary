@@ -51,7 +51,7 @@ password = st.secrets["password"]
 ENDPOINT_ID = st.secrets["ENDPOINT_ID"]
 
 ## vertexAI＞エンドポイント＞APIの例　からPROJECT_IDをコピペ
-PROJECT_ID = st.secrets["PROJECT_ID"]
+#PROJECT_ID = st.secrets["PROJECT_ID"]
 
 
 
