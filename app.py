@@ -1,3 +1,5 @@
+# app.py　として格納
+
 # 必要なライブラリのインポート
 import pprint
 import requests
@@ -12,7 +14,31 @@ import streamlit as st
 
 # streamlitのシークレット情報を変数に格納
 ## GCPのサービスアカウント鍵情報
-service_account_key = st.secrets["service_account_key"]
+type2 = st.secrets["type2"]
+project_id = st.secrets["project_id"]
+private_key_id = st.secrets["private_key_id"]
+private_key = st.secrets["private_key"]
+client_email = st.secrets["client_email"]
+client_id = st.secrets["client_id"]
+auth_uri = st.secrets["auth_uri"]
+token_uri = st.secrets["token_uri"]
+auth_provider_x509_cert_url = st.secrets["auth_provider_x509_cert_url"]
+client_x509_cert_url = st.secrets["client_x509_cert_url"]
+
+## jsonに再変換
+service_account_key = {
+  "type": type2,
+  "project_id": project_id,
+  "private_key_id": private_key_id,
+  "private_key": private_key,
+  "client_email": client_email,
+  "client_id": client_id,
+  "auth_uri": auth_uri,
+  "token_uri": token_uri,
+  "auth_provider_x509_cert_url": auth_provider_x509_cert_url,
+  "client_x509_cert_url": client_x509_cert_url
+}
+
 
 ## Natural Language AIのAPIキー。確認方法はこちら）
 ### https://cloud.google.com/docs/authentication/api-keys?hl=ja
