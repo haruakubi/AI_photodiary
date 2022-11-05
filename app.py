@@ -7,10 +7,14 @@ import json
 import MeCab
 import os
 import requests
-import pprint
 import subprocess # pythonプログラム上でコマンドラインを実行するモジュール
 import streamlit as st
-import pprint
+import google.auth
+import google.auth.transport.requests
+from google.oauth2 import service_account
+
+
+
 
 
 # streamlitのシークレット情報を変数に格納
@@ -62,19 +66,38 @@ with open("./key.json", "w") as f:
     json.dump(service_account_key, f, indent=2, ensure_ascii=False)
 
 #一時的
-with open("./key.json") as f:
-    jf = json.load(f)
+#with open("./key.json") as f:
+#    jf = json.load(f)
 
 # 鍵情報を使ってGCPに認証
-command = "gcloud auth activate-service-account  --key-file='./key.json'"
-ret = subprocess.run(command, shell=True)
+#command = "gcloud auth activate-service-account  --key-file='./key.json'"
+#ret = subprocess.run(command, shell=True)
 
 
 # vertwxAIにアクセスするためのトークンを発行
-command2 = "gcloud auth print-access-token"
-ret2 = subprocess.run(command2, shell=True, capture_output=True, text=True)
-tokentest = ret2.stdout
-token2 = subprocess.getoutput(command2)
+#command2 = "gcloud auth print-access-token"
+#ret2 = subprocess.run(command2, shell=True, capture_output=True, text=True)
+#tokentest = ret2.stdout
+#token2 = subprocess.getoutput(command2)
+
+# Creates a credentials object from the service account file
+credentials = service_account.Credentials.from_service_account_file(
+    "./key.json", # key path
+    scopes=['https://www.googleapis.com/auth/cloud-platform'] # scopes
+)
+
+# Prepare an authentication request
+auth_req = google.auth.transport.requests.Request()
+
+# Request refresh tokens
+credentials.refresh(auth_req)
+
+# now we can print the access token
+token2 = credentials.token
+
+
+
+
 
 # GCPのNatural Language AI を使用するための変数定義
 ## APIのアクセス先（エンドポイント）
@@ -160,9 +183,9 @@ if check_password():
           ]
         }
         #一時的
-        st.text(f'ret is {ret}')
-        st.text(f'ret2 is {ret2}')
+        #st.text(f'ret is {ret}')
+        #st.text(f'ret2 is {ret2}')
         st.text(f'token2 is {token2}')
         st.text(f'jf is {jf}')
-        st.text(f'tokentest is {tokentest}')
+        #st.text(f'tokentest is {tokentest}')
 
