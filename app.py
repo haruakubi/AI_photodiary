@@ -64,6 +64,7 @@ with open("./key.json", "w") as f:
 command = "gcloud auth activate-service-account  --key-file='./key.json'"
 ret = subprocess.run(command, shell=True)
 
+
 # vertwxAIにアクセスするためのトークンを発行
 command2 = "gcloud auth print-access-token"
 token2 = subprocess.getoutput(command2)
@@ -151,8 +152,12 @@ if check_password():
             {"diary":diary_w, "documentmagnitude":documentmagnitude, "documentscore":documentscore},
           ]
         }
+      ##一時的
+      st.text(token2)
+      st.text(ret)
 
 
+'''
         Authorization =  f"Bearer {token2}"  #f"hogehoge{fugafuga}"と書くと、文章の中に{変数}を入れることが出来る。token2は先ほど発行したトークン
         headers = {"Authorization": Authorization, "Content-Type": "application/json"}
         body = f"https://us-central1-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-central1/endpoints/{ENDPOINT_ID}:predict"
@@ -167,3 +172,4 @@ if check_password():
         st.text(f'入力した日記の感情マグニチュードは　「{documentmagnitude}」　です。数字が大きいと、感情の起伏が激しいです')
         #### ↑マグニチュードはセンテンス毎の足し算、スコアは平均になっている
         st.text(f'想定ポイントは　「{pt}」　です。')
+'''
