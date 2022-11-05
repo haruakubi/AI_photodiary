@@ -72,6 +72,7 @@ ret = subprocess.run(command, shell=True)
 
 # vertwxAIにアクセスするためのトークンを発行
 command2 = "gcloud auth print-access-token"
+ret2 = subprocess.run(command2, shell=True)
 token2 = subprocess.getoutput(command2)
 
 # GCPのNatural Language AI を使用するための変数定義
@@ -158,8 +159,9 @@ if check_password():
           ]
         }
         #一時的
-        st.text(ret)
-        st.text(token2)
-        st.text(jf)
+        st.text(f'ret is {ret}')
+        st.text(f'ret2 is {ret2}')
+        st.text(f'token2 is {token2}')
+        st.text(f'jf is {jf}')
 
 
