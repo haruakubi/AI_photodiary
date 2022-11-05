@@ -155,7 +155,7 @@ if check_password():
 
         Authorization =  f"Bearer {token2}"  #f"hogehoge{fugafuga}"と書くと、文章の中に{変数}を入れることが出来る。token2は先ほど発行したトークン
         headers = {"Authorization": Authorization, "Content-Type": "application/json"}
-        body = f"https://us-central1-aiplatform.googleapis.com/v1/projects/{PROJECT_ID}/locations/us-central1/endpoints/{ENDPOINT_ID}:predict"
+        body = f"https://us-central1-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-central1/endpoints/{ENDPOINT_ID}:predict"
         response = requests.post(body, headers=headers, data=json.dumps(input))
         jsn = response.json()
         pt = jsn['predictions'][0]['value'] #jsonを抽出。実際にはこんな感じで出る
