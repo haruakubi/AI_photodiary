@@ -189,9 +189,9 @@ if check_password():
 
 
         #小数点切り上げ
-         average = math.ceil(average)
-         legend = math.ceil(legend)
-         ranker = math.ceil(ranker)
+        average = math.ceil(average)
+        legend = math.ceil(legend)
+        ranker = math.ceil(ranker)
 
         ## 結果を出力する
         st.subheader('入力値')
