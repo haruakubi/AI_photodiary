@@ -12,7 +12,8 @@ import streamlit as st
 import google.auth # GCP認証系
 import google.auth.transport.requests # GCP認証系
 from google.oauth2 import service_account # GCP認証系。これがサービスアカウント（アプリやサービスが使うアカウント）の認証モジュール
-
+import pandas as pd
+import plotly.express as px
 
 
 
@@ -123,6 +124,8 @@ def check_password():
         # Password correct.
         return True
 
+#streamlitの幅がせまいので、幅を広げる
+st.set_page_config(layout="wide")
 
 ##　先ほど定義したcheck_password()関数を使う。if文の最初は==TrueとわざわざやらなくてOK
 if check_password():
@@ -184,12 +187,26 @@ if check_password():
         ranker = ranker*100
 
         ## 結果を出力する
+        st.subheader('入力値')
         st.text(f'入力した日記は　「{diary_w}」　です')
         st.text(f'入力した日記の感情スコアは　「{documentscore}」　です。ポジティブが1、ネガティブが-1です')
         st.text(f'入力した日記の感情マグニチュードは　「{documentmagnitude}」　です。数字が大きいと、感情の起伏が激しいです')
+
         #### ↑マグニチュードはセンテンス毎の足し算、スコアは平均になっている
+        st.subheader('結果')
         st.text(f'平均的な嬢である可能性が　{average}　パーセント、')
         st.text(f'一般的なランカー嬢である可能性が　{ranker}　パーセント、')
         st.text(f'レジェンドクラスのランカー嬢である可能性が　{legend}　パーセントです')
 
+        df1 = pd.DataFrame(
+            data={'per': [average, ranker, legend], 
+                  'name': ["平均", "ランカー", "レジェンド"]
+            }
+        )
 
+        fig = px.pie(data_frame=df1,
+              values='per',
+              names='name',
+        )
+
+        st.plotly_chart(fig)
