@@ -125,7 +125,7 @@ def check_password():
         return True
 
 #streamlitの幅がせまいので、幅を広げる
-st.set_page_config(layout="wide")
+#st.set_page_config(layout="wide")
 
 ##　先ほど定義したcheck_password()関数を使う。if文の最初は==TrueとわざわざやらなくてOK
 if check_password():
