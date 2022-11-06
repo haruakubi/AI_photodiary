@@ -210,11 +210,6 @@ if check_password():
               values=values,
               names=labels,
               color=labels,
-              color_discrete_map={
-                '平均':'yellow',
-                'ランカー':'blue',
-                'レジェンド':'red',
-              }
         )
 
         st.plotly_chart(fig)
