@@ -213,9 +213,9 @@ if check_password():
               names=labels,
               color=labels,
               color_discrete_map={
-                '平均':'green',
-                'ランカー':'blue',
-                'レジェンド':'red',
+                '平均':"#00CC96",
+                'ランカー':"#636EFA",
+                'レジェンド':"#EF553B",
               }
         )
 
