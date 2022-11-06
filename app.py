@@ -14,7 +14,7 @@ import google.auth.transport.requests # GCP認証系
 from google.oauth2 import service_account # GCP認証系。これがサービスアカウント（アプリやサービスが使うアカウント）の認証モジュール
 import pandas as pd
 import plotly.express as px
-
+import math
 
 
 
