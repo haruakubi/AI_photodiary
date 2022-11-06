@@ -171,7 +171,11 @@ if check_password():
         body = f"https://us-central1-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-central1/endpoints/{ENDPOINT_ID}:predict"
         response = requests.post(body, headers=headers, data=json.dumps(input))
         jsn = response.json()
-        #classify = jsn['predictions'][0]['value'] #jsonを抽出。実際にはこんな感じで出る
+        average = jsn['predictions'][0]['scores'][0] 
+        legend = jsn['predictions'][0]['scores'][1]
+        ranker = jsn['predictions'][0]['scores'][2]
+        #jsonを抽出。実際にはこんな感じで出る
+        #{'predictions': [{'scores': [0.2674256861209869, 0.5577417612075806, 0.1748325377702713], 'classes': ['average', 'legend', 'ranker']}], 'deployedModelId': '2621504001455161344', 'model': 'projects/595691370414/locations/us-central1/models/7018222302512807936', 'modelDisplayName': 'F_AI_ver3.0_r1', 'modelVersionId': '1'}
 
 
         ## 結果を出力する
@@ -179,6 +183,6 @@ if check_password():
         st.text(f'入力した日記の感情スコアは　「{documentscore}」　です。ポジティブが1、ネガティブが-1です')
         st.text(f'入力した日記の感情マグニチュードは　「{documentmagnitude}」　です。数字が大きいと、感情の起伏が激しいです')
         #### ↑マグニチュードはセンテンス毎の足し算、スコアは平均になっている
-        st.text(f'取得した結果は　「{jsn}」　です。')
+        st.text(f'取得した結果は　「{average}」「{legend}」「{ranker}」　です。')
         #st.text(f'想定分類は　「{classify}」　です。')
 
