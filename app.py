@@ -9,9 +9,9 @@ import os
 import requests
 import subprocess # pythonプログラム上でコマンドラインを実行するモジュール
 import streamlit as st
-import google.auth
-import google.auth.transport.requests
-from google.oauth2 import service_account
+import google.auth # GCP認証系
+import google.auth.transport.requests # GCP認証系
+from google.oauth2 import service_account # GCP認証系。これがサービスアカウント（アプリやサービスが使うアカウント）の認証モジュール
 
 
 
@@ -65,20 +65,20 @@ ENDPOINT_ID = st.secrets["ENDPOINT_ID"]
 with open("./key.json", "w") as f:
     json.dump(service_account_key, f, indent=2, ensure_ascii=False)
 
-
-# Creates a credentials object from the service account file
+#GCP認証
+## クレデンシャルオブジェクトを作る
 credentials = service_account.Credentials.from_service_account_file(
     "./key.json", # key path
     scopes=['https://www.googleapis.com/auth/cloud-platform'] # scopes
 )
 
-# Prepare an authentication request
+## 認証リクエストの箱を作る
 auth_req = google.auth.transport.requests.Request()
 
-# Request refresh tokens
+## 認証リクエストの箱を空にする
 credentials.refresh(auth_req)
 
-# now we can print the access token
+## クレデンシャルからトークンを発行する
 token2 = credentials.token
 
 
@@ -171,7 +171,7 @@ if check_password():
         body = f"https://us-central1-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-central1/endpoints/{ENDPOINT_ID}:predict"
         response = requests.post(body, headers=headers, data=json.dumps(input))
         jsn = response.json()
-        pt = jsn['predictions'][0]['value'] #jsonを抽出。実際にはこんな感じで出る
+        #classify = jsn['predictions'][0]['value'] #jsonを抽出。実際にはこんな感じで出る
 
 
         ## 結果を出力する
@@ -179,5 +179,6 @@ if check_password():
         st.text(f'入力した日記の感情スコアは　「{documentscore}」　です。ポジティブが1、ネガティブが-1です')
         st.text(f'入力した日記の感情マグニチュードは　「{documentmagnitude}」　です。数字が大きいと、感情の起伏が激しいです')
         #### ↑マグニチュードはセンテンス毎の足し算、スコアは平均になっている
-        st.text(f'想定ポイントは　「{pt}」　です。')
+        st.text(f'取得した結果は　「{jsn}」　です。')
+        #st.text(f'想定分類は　「{classify}」　です。')
 
