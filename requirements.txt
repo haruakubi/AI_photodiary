@@ -3,3 +3,4 @@ mecab-python3
 unidic-lite
 google-cloud-aiplatform
 plotly
+pandas
