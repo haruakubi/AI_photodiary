@@ -182,9 +182,9 @@ if check_password():
         ranker = jsn['predictions'][0]['scores'][2]
 
         #パーセンテージ表示のため、100倍する
-        average = average*100
-        legend = legend*100
-        ranker = ranker*100
+        average = float(average*100)
+        legend = float(legend*100)
+        ranker = float(ranker*100)
 
 
 
