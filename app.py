@@ -186,6 +186,13 @@ if check_password():
         legend = legend*100
         ranker = ranker*100
 
+
+
+        #小数点切り上げ
+         average = math.ceil(average)
+         legend = math.ceil(legend)
+         ranker = math.ceil(ranker)
+
         ## 結果を出力する
         st.subheader('入力値')
         st.text(f'入力した日記は　「{diary_w}」　です')
