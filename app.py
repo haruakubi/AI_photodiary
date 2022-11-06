@@ -171,12 +171,17 @@ if check_password():
         body = f"https://us-central1-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-central1/endpoints/{ENDPOINT_ID}:predict"
         response = requests.post(body, headers=headers, data=json.dumps(input))
         jsn = response.json()
+
+        #jsonを抽出。実際にはこんな感じで出る
+        #{'predictions': [{'scores': [0.2674256861209869, 0.5577417612075806, 0.1748325377702713], 'classes': ['average', 'legend', 'ranker']}], 'deployedModelId': '2621504001455161344', 'model': 'projects/595691370414/locations/us-central1/models/7018222302512807936', 'modelDisplayName': 'F_AI_ver3.0_r1', 'modelVersionId': '1'}
         average = jsn['predictions'][0]['scores'][0] 
         legend = jsn['predictions'][0]['scores'][1]
         ranker = jsn['predictions'][0]['scores'][2]
-        #jsonを抽出。実際にはこんな感じで出る
-        #{'predictions': [{'scores': [0.2674256861209869, 0.5577417612075806, 0.1748325377702713], 'classes': ['average', 'legend', 'ranker']}], 'deployedModelId': '2621504001455161344', 'model': 'projects/595691370414/locations/us-central1/models/7018222302512807936', 'modelDisplayName': 'F_AI_ver3.0_r1', 'modelVersionId': '1'}
 
+        #パーセンテージ表示のため、100倍する
+        average = average*100
+        legend = legend*100
+        ranker = ranker*100
 
         ## 結果を出力する
         st.text(f'入力した日記は　「{diary_w}」　です')
