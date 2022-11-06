@@ -207,6 +207,12 @@ if check_password():
         fig = px.pie(data_frame=df1,
               values='per',
               names='name',
+              color='name',
+              color_discrete_map={
+                '平均':'yellow',
+                'ランカー':'blue',
+                'レジェンド':'red',
+              }
         )
 
         st.plotly_chart(fig)
