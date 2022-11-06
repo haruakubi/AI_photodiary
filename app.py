@@ -206,7 +206,7 @@ if check_password():
               names=labels,
               color=labels,
               color_discrete_map={
-                '平均':'yellow',
+                '平均':'green',
                 'ランカー':'blue',
                 'レジェンド':'red',
               }
