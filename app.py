@@ -198,18 +198,15 @@ if check_password():
         st.text(f'一般的なランカー嬢である可能性が　{ranker}　パーセント、')
         st.text(f'レジェンドクラスのランカー嬢である可能性が　{legend}　パーセントです')
 
-        #df1 = pd.DataFrame(
-        #    data={'per': [average, ranker, legend], 
-        #          'name': ["平均", "ランカー", "レジェンド"]
-        #    }
-        #)
-        values = [average, ranker, legend]
-        labels = ["平均", "ランカー", "レジェンド"]
+        df1 = pd.DataFrame(
+            data={'per': [average, ranker, legend], 
+                  'name': ["平均", "ランカー", "レジェンド"]
+            }
+        )
 
-        fig = px.pie(
-              values=values,
-              names=labels,
-              color=labels,
+        fig = px.pie(data_frame=df1,
+              values='per',
+              names='name',
         )
 
         st.plotly_chart(fig)
