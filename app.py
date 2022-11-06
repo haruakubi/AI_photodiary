@@ -183,6 +183,8 @@ if check_password():
         st.text(f'入力した日記の感情スコアは　「{documentscore}」　です。ポジティブが1、ネガティブが-1です')
         st.text(f'入力した日記の感情マグニチュードは　「{documentmagnitude}」　です。数字が大きいと、感情の起伏が激しいです')
         #### ↑マグニチュードはセンテンス毎の足し算、スコアは平均になっている
-        st.text(f'取得した結果は　「{average}」「{legend}」「{ranker}」　です。')
-        #st.text(f'想定分類は　「{classify}」　です。')
+        st.text(f'平均的な嬢である可能性が　{average}　パーセント、')
+        st.text(f'一般的なランカー嬢である可能性が　{ranker}　パーセント、')
+        st.text(f'レジェンドクラスのランカー嬢である可能性が　{legend}　パーセントです')
+
 
